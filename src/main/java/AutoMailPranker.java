@@ -28,6 +28,9 @@ public class AutoMailPranker {
 
         SmtpClient SMTPc1 = new SmtpClient(appProps.getProperty("smtpServerAddress"),Integer.parseInt(appProps.getProperty("smtpServerPort")));
 
+        Mail m1 = new Mail();
+
+        SMTPc1.sendMail(m1);
 
 
     }

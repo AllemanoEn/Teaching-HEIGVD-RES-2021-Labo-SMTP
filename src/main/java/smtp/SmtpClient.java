@@ -29,18 +29,20 @@ public class SmtpClient implements ISmtpClient{
         br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
         pw = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(),StandardCharsets.UTF_8),true);
 
+        String fromSMTPserver = br.readLine();
 
+        System.out.println(fromSMTPserver);
+        pw.println("EHLO localhost");
 
-        String msg = br.readLine();
+        fromSMTPserver = br.readLine();
+        if(!fromSMTPserver.startsWith("250")){
+            throw new IOException("SMTP error: "+ fromSMTPserver);
+        }
 
-        System.out.println(msg);
-
-        pw.println("coucou");
-        pw.flush();
-
-        msg = br.readLine();
-
-        System.out.println(msg);
+        while (fromSMTPserver.startsWith("250-")){
+            fromSMTPserver = br.readLine();
+            System.out.println(fromSMTPserver);
+        }
 
         pw.close();
         br.close();
