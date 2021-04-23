@@ -1,5 +1,9 @@
 package smtp;
 
+import model.Mail;
+
+import java.io.IOException;
+
 public interface ISmtpClient {
-    public void sendMessage();
+    void sendMail(Mail mail) throws IOException;
 }
