@@ -3,7 +3,10 @@ import smtp.SmtpClient;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.Properties;
+
+
 
 
 public class AutoMailPranker {
@@ -18,7 +21,9 @@ public class AutoMailPranker {
         Group g = new Group();
         g.addMember(p);
 
-        String appConfigPath = "C:\\Users\\jetca\\Documents\\RES\\labo4\\Teaching-HEIGVD-RES-2021-Labo-SMTP\\src\\main\\java\\config\\config.properties";
+        Path currentRelativePath = Paths.get("");
+        String currentDir = currentRelativePath.toAbsolutePath().toString();
+        String appConfigPath = currentDir + "\\src\\main\\java\\config\\config.properties";
         Properties appProps = new Properties();
         appProps.load(new FileInputStream(appConfigPath));
         System.out.println(appProps.getProperty("smtpServerAddress"));
