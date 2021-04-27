@@ -1,27 +1,35 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Prank {
     private Person victimSender;
-    private List<Person> victimList = new ArrayList<>();
-    private List<Person> witnessList = new ArrayList<>();
+    private Person victimRcpt;
+    private Vector<Person> witnessList = new Vector<>();
     private String message;
 
-    public Mail generateMailMessage(){
-        Mail msg = new Mail();
-        msg.setBody(this.message + "\r\n" + victimSender.getFirstName());
+    public Prank(Group group, String message){
+        victimSender = group.getMembers().elementAt(0);
+        victimRcpt = group.getMembers().elementAt(1);
+        Collections.copy(witnessList,group.getMembers().subList(2, group.getMembers().size()-1));
+        this.message = message;
+    }
 
-        String[] to = victimList.stream().map(person -> person.getAddress()).collect(Collectors.toList()).toArray(new String[]{});
-        msg.setTo(to);
+    public Mail generateMailMessage(){
+        Mail mail = new Mail();
+
+        mail.setBody(message);
+
+        mail.setBody(message + "\r\n" + victimSender.getFirstName());
+
+        mail.setTo(victimRcpt.getAddress());
 
         String[] cc = witnessList.stream().map(person -> person.getAddress()).collect(Collectors.toList()).toArray(new String[]{});
-        msg.setCc(cc);
+        mail.setCc(cc);
 
-        msg.setFrom(victimSender.getAddress());
+        mail.setFrom(victimSender.getAddress());
 
-        return msg;
+        return mail;
     }
 }

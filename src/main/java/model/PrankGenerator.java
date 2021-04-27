@@ -1,22 +1,42 @@
 package model;
 
+import smtp.SmtpClient;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Properties;
 import java.util.Vector;
 
-public class PrankGenerator {
+public class PrankGenerator{
 
     String pathToMessageFile;
     String pathToVictimsFile;
     Vector<String> vMessage = new Vector<>();
     Vector<Person> vPerson = new Vector<>();
+    Vector<Group> vGroup = new Vector<>();
+    Vector<Prank> vPrank = new Vector<>();
     BufferedReader bfMessages;
     BufferedReader bfMailAddress;
+    int groupSize;
+    int nbGroup;
+    Properties appProps;
 
-    public PrankGenerator(String pathToMessageFile, String pathToVictimsFile){
+    public PrankGenerator(String pathToMessageFile, String pathToVictimsFile, int groupSize, String appConfigPath) throws IOException {
+
+        appProps = new Properties();
+        appProps.load(new FileInputStream(appConfigPath));
+
+        nbGroup = Integer.parseInt(appProps.getProperty("numberOfGroup"));
+
+        if (groupSize < 3 || nbGroup < 1){
+            throw new RuntimeException("Group number must be grather or egal than 3 \nGroup size must be grather than or egal than  1");
+        }
+
         this.pathToMessageFile = pathToMessageFile;
         this.pathToVictimsFile = pathToVictimsFile;
-
+        this.groupSize = groupSize;
     }
 
     public void generate() throws IOException {
@@ -41,6 +61,28 @@ public class PrankGenerator {
             vPerson.add(new Person(person));
         }
 
+        for (int i = 0;i < nbGroup;i++){
+            vGroup.add(new Group());
+        }
+
+        for(Group g : vGroup){
+            for(int i = 0;i < groupSize;i++){
+                g.addMember(vPerson.elementAt(i));
+                Collections.shuffle(vPerson);
+            }
+        }
+
+        int random;
+        for (int i = 0;i < nbGroup;i++){
+            random = (int)Math.random() * vMessage.size();
+            vPrank.add(new Prank(vGroup.elementAt(i),vMessage.elementAt(random)));
+        }
+
+        SmtpClient smtpClient = new SmtpClient(appProps.getProperty("smtpServerAddress"),Integer.parseInt(appProps.getProperty("smtpServerPort")));
+
+        for(Prank p : vPrank){
+            smtpClient.sendMail(p.generateMailMessage());
+        }
 
         bfMessages.close();
         bfMailAddress.close();

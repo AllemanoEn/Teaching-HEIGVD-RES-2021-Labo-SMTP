@@ -5,10 +5,9 @@ import java.util.*;
 import lombok.Getter;
 
 public class Group {
-    @Getter private List<Person> members = new ArrayList<>();
+    @Getter private Vector<Person> members = new Vector<>();
 
     public void addMember(Person person){
         members.add(person);
     }
-
 }

@@ -49,14 +49,13 @@ public class SmtpClient implements ISmtpClient{
 
         pw.println("MAIL FROM:" + mail.getFrom());
         fromSMTPserver = br.readLine();
+        LOG.info(fromSMTPserver);
 
         //at this point, we could not differ between TO, CC and BCC
 
-        for (String to : mail.getTo()){
-            pw.println("RCPT TO:" + to);
-            fromSMTPserver = br.readLine();
-            LOG.info(fromSMTPserver);
-        }
+        pw.println("RCPT TO:" + mail.getTo());
+        fromSMTPserver = br.readLine();
+        LOG.info(fromSMTPserver);
 
         for (String to : mail.getCc()){
             pw.println("RCPT TO:" + to);
@@ -76,11 +75,7 @@ public class SmtpClient implements ISmtpClient{
         pw.println("Content Type: text/plain; charset=utf-8");
         pw.println("From: " + mail.getFrom());
 
-        pw.write("To: " + mail.getTo()[0]);
-        for(int i = 1; i < mail.getTo().length;i++){
-            pw.write(", " + mail.getTo()[i]);
-        }
-        pw.write("\r\n");
+        pw.println("To: " + mail.getTo());
 
         pw.write("Cc: " + mail.getCc()[0]);
         for(int i = 1; i < mail.getCc().length;i++){
