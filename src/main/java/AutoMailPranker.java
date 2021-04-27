@@ -24,6 +24,9 @@ public class AutoMailPranker {
         Path currentRelativePath = Paths.get("");
         String currentDir = currentRelativePath.toAbsolutePath().toString();
         String appConfigPath = currentDir + "\\src\\main\\java\\config\\config.properties";
+        String messageFilePath = currentDir + "\\src\\main\\java\\config\\messages.utf8";
+        String victimsFilePath = currentDir + "\\src\\main\\java\\config\\victims.utf8";
+
         Properties appProps = new Properties();
         appProps.load(new FileInputStream(appConfigPath));
         System.out.println(appProps.getProperty("smtpServerAddress"));
@@ -31,11 +34,14 @@ public class AutoMailPranker {
         System.out.println(appProps.getProperty("numberOfGroup"));
         System.out.println(appProps.getProperty("witnessToCC"));
 
-        SmtpClient SMTPc1 = new SmtpClient(appProps.getProperty("smtpServerAddress"),Integer.parseInt(appProps.getProperty("smtpServerPort")));
+        /*SmtpClient SMTPc1 = new SmtpClient(appProps.getProperty("smtpServerAddress"),Integer.parseInt(appProps.getProperty("smtpServerPort")));
 
         Mail m1 = new Mail();
 
-        SMTPc1.sendMail(m1);
+        SMTPc1.sendMail(m1);*/
+
+        PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath);
+        pg.generate();
 
 
     }
