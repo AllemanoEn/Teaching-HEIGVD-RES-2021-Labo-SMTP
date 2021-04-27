@@ -34,7 +34,7 @@ public class SmtpClient implements ISmtpClient{
 
         String fromSMTPserver = br.readLine();
 
-        LOG.info(fromSMTPserver);
+        System.out.println(fromSMTPserver);
         pw.println("EHLO localhost");
 
         fromSMTPserver = br.readLine();
@@ -42,30 +42,32 @@ public class SmtpClient implements ISmtpClient{
             throw new IOException("SMTP error: "+ fromSMTPserver);
         }
 
+        System.out.println(fromSMTPserver);
+
         while (fromSMTPserver.startsWith("250-")){
             fromSMTPserver = br.readLine();
-            LOG.info(fromSMTPserver);
+            System.out.println(fromSMTPserver);
         }
 
         pw.println("MAIL FROM:" + mail.getFrom());
         fromSMTPserver = br.readLine();
-        LOG.info(fromSMTPserver);
+        System.out.println(fromSMTPserver + " - MAIL FROM");
 
         //at this point, we could not differ between TO, CC and BCC
 
         pw.println("RCPT TO:" + mail.getTo());
         fromSMTPserver = br.readLine();
-        LOG.info(fromSMTPserver);
+        System.out.println(fromSMTPserver + " - RCPT TO");
 
         for (String to : mail.getCc()){
             pw.println("RCPT TO:" + to);
             fromSMTPserver = br.readLine();
-            LOG.info(fromSMTPserver);
+            System.out.println(fromSMTPserver + " - RCPT TO");
         }
 
         pw.println("DATA");
         fromSMTPserver = br.readLine();
-        LOG.info(fromSMTPserver);
+        System.out.println(fromSMTPserver + " - DATA");
         pw.println("Content Type: text/plain; charset=utf-8");
         pw.println("From: " + mail.getFrom());
 
@@ -83,8 +85,11 @@ public class SmtpClient implements ISmtpClient{
 
         pw.println(mail.getBody());
 
-        pw.write("\r\n");
+        pw.write(".\r\n");
         pw.flush();
+        
+        fromSMTPserver = br.readLine();
+        System.out.println(fromSMTPserver + " - Body");
 
         pw.println("QUIT");
 

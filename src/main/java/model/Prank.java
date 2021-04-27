@@ -30,6 +30,8 @@ public class Prank {
 
         mail.setFrom(victimSender.getAddress());
 
+        mail.setSubject("Prank");
+
         return mail;
     }
 }

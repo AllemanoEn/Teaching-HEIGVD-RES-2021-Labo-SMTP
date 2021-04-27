@@ -13,10 +13,10 @@ public class AutoMailPranker {
         String messageFilePath = currentDir + "\\src\\main\\java\\config\\messages.utf8";
         String victimsFilePath = currentDir + "\\src\\main\\java\\config\\victims.utf8";
 
-        //PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,3,appConfigPath);
-        //pg.generate();
+        PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,10,appConfigPath);
+        pg.generate();
 
-        Mail m = new Mail();
+        /*Mail m = new Mail();
         m.setBody("mon body");
         String[] oui = new String[1];
         oui[0] ="enzo.allemano@homail.com";
@@ -25,7 +25,7 @@ public class AutoMailPranker {
         m.setFrom("mon.cul@hotmail.com");
         m.setSubject("mon sujet");
         SmtpClient test = new SmtpClient("localhost",25);
-        test.sendMail(m);
+        test.sendMail(m);*/
 
     }
 }

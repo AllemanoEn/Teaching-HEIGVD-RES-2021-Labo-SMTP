@@ -4,10 +4,7 @@ import smtp.SmtpClient;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Properties;
-import java.util.Vector;
+import java.util.*;
 
 public class PrankGenerator{
 
@@ -73,8 +70,9 @@ public class PrankGenerator{
         }
 
         int random;
+        Random generator = new Random();
         for (int i = 0;i < nbGroup;i++){
-            random = (int)Math.random() * vMessage.size();
+            random = generator.nextInt(vMessage.size());
             vPrank.add(new Prank(vGroup.elementAt(i),vMessage.elementAt(random)));
         }
 
