@@ -1,25 +1,11 @@
 import model.*;
 import smtp.SmtpClient;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.Properties;
-
-
-
 
 public class AutoMailPranker {
     public static void main(String[] args) throws IOException {
-
-        Person p = new Person("enzo.allemano@hotmail.com");
-
-        System.out.println(p.getAddress());
-        System.out.println(p.getFirstName());
-        System.out.println(p.getLastName());
-
-        Group g = new Group();
-        g.addMember(p);
 
         Path currentRelativePath = Paths.get("");
         String currentDir = currentRelativePath.toAbsolutePath().toString();
@@ -27,9 +13,19 @@ public class AutoMailPranker {
         String messageFilePath = currentDir + "\\src\\main\\java\\config\\messages.utf8";
         String victimsFilePath = currentDir + "\\src\\main\\java\\config\\victims.utf8";
 
-        PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,3,appConfigPath);
-        pg.generate();
+        //PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,3,appConfigPath);
+        //pg.generate();
 
+        Mail m = new Mail();
+        m.setBody("mon body");
+        String[] oui = new String[1];
+        oui[0] ="enzo.allemano@homail.com";
+        m.setCc(oui);
+        m.setTo("luca.zacheo@asdas.ch");
+        m.setFrom("mon.cul@hotmail.com");
+        m.setSubject("mon sujet");
+        SmtpClient test = new SmtpClient("localhost",25);
+        test.sendMail(m);
 
     }
 }

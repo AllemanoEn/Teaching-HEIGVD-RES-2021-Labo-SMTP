@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 public class Prank {
     private Person victimSender;
     private Person victimRcpt;
-    private Vector<Person> witnessList = new Vector<>();
+    private List<Person> witnessList = new ArrayList<>();
     private String message;
 
     public Prank(Group group, String message){
         victimSender = group.getMembers().elementAt(0);
         victimRcpt = group.getMembers().elementAt(1);
-        Collections.copy(witnessList,group.getMembers().subList(2, group.getMembers().size()-1));
+        witnessList = group.getMembers().subList(2, group.getMembers().size());
         this.message = message;
     }
 

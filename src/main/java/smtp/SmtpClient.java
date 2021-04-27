@@ -63,12 +63,6 @@ public class SmtpClient implements ISmtpClient{
             LOG.info(fromSMTPserver);
         }
 
-        for (String to : mail.getBcc()){
-            pw.println("RCPT TO:" + to);
-            fromSMTPserver = br.readLine();
-            LOG.info(fromSMTPserver);
-        }
-
         pw.println("DATA");
         fromSMTPserver = br.readLine();
         LOG.info(fromSMTPserver);
@@ -82,20 +76,15 @@ public class SmtpClient implements ISmtpClient{
             pw.write(", " + mail.getCc()[i]);
         }
         pw.write("\r\n");
-
-        pw.write("Bcc: " + mail.getBcc()[0]);
-        for(int i = 1; i < mail.getBcc().length;i++){
-            pw.write(", " + mail.getBcc()[i]);
-        }
-        pw.write("\r\n");
-
         pw.flush();
 
-        LOG.info(mail.getBody());
+        pw.println("Subject: " + mail.getSubject());
+        pw.write("\r\n");
+
         pw.println(mail.getBody());
 
-        fromSMTPserver = br.readLine();
-        LOG.info(fromSMTPserver);
+        pw.write("\r\n");
+        pw.flush();
 
         pw.println("QUIT");
 
