@@ -1,6 +1,6 @@
-package model;
+package ch.heigvd.res.model;
 
-import smtp.SmtpClient;
+import ch.heigvd.res.smtp.SmtpClient;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

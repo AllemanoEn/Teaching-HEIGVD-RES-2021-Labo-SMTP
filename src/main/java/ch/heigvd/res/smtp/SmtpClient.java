@@ -1,6 +1,6 @@
-package smtp;
+package ch.heigvd.res.smtp;
 
-import model.Mail;
+import ch.heigvd.res.model.Mail;
 
 import java.io.*;
 import java.net.Socket;

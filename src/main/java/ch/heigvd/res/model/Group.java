@@ -1,4 +1,4 @@
-package model;
+package ch.heigvd.res.model;
 
 import java.util.*;
 
