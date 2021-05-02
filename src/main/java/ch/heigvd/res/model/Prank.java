@@ -8,12 +8,16 @@ public class Prank {
     private Person victimRcpt;
     private List<Person> witnessList = new ArrayList<>();
     private String message;
+    private String subject;
 
     public Prank(Group group, String message){
         victimSender = group.getMembers().elementAt(0);
         victimRcpt = group.getMembers().elementAt(1);
         witnessList = group.getMembers().subList(2, group.getMembers().size());
-        this.message = message;
+
+        int index = message.indexOf("!!");
+        this.subject = message.substring(10,index);
+        this.message = message.substring(index);
     }
 
     public Mail generateMailMessage(){
@@ -30,7 +34,7 @@ public class Prank {
 
         mail.setFrom(victimSender.getAddress());
 
-        mail.setSubject("Prank");
+        mail.setSubject(subject);
 
         return mail;
     }

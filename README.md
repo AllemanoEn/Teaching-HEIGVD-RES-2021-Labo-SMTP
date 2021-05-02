@@ -19,7 +19,7 @@ Le programme se connecte en localhost sur le port 25, nous utilisons un serveur 
 * Télécharger la release
 * Décompresser le zip
 * Démarrer Docker
-* Aller dans le dir Docker et lancez `BUILDPASSUR DU NOM.sh` ainsi que `RUN CHEPA.sh`
+* Aller dans le dir docker et lancez `BUILDPASSUR DU NOM.sh` ainsi que `RUN CHEPA.sh`
 * vérifier le bon lancement du srv en tappant `localhost:8282` dans un navigateur.
 
 
@@ -34,6 +34,7 @@ Le programme se connecte en localhost sur le port 25, nous utilisons un serveur 
  ![properties](figures/properties.PNG)
 
 Ce fichier sert à gérer le port ainsi que l'adresse à laquelle notre application tentera de se connecter.
+
 Mais il sert également à définir le nombre de groupes de victimes.
 
 * Remplir le fichier `messages.utf8` avec les messages de futurs faux e-mails.
