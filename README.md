@@ -41,7 +41,12 @@ Mais il sert également à définir le nombre de groupes de victimes.
 
 ![messages](figures/messages.PNG)
 
-Comme mentionné dans l'images ci-dessus, le séparateur entre les messages est un double trait d'union (--).
+Comme mentionné dans l'images ci-dessus,
+il faut respecté la nomenclature du sujet en laissant le `SUBJECT : ` 
+
+Il faut donc écrire le sujet souhaité à la suite de ce mot avec un espace et terminer le sujet par un `!!`
+
+Le séparateur entre les messages est un double trait d'union (--).
 
 <h4> Lancement de l'application </h4>
 
