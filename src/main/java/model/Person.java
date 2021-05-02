@@ -28,6 +28,4 @@ public class Person {
             System.out.println("Mail non valide !");
         }
     }
-
-
 }

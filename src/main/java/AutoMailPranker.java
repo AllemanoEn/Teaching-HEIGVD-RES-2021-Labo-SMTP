@@ -15,17 +15,5 @@ public class AutoMailPranker {
 
         PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,10,appConfigPath);
         pg.generate();
-
-        /*Mail m = new Mail();
-        m.setBody("mon body");
-        String[] oui = new String[1];
-        oui[0] ="enzo.allemano@homail.com";
-        m.setCc(oui);
-        m.setTo("luca.zacheo@asdas.ch");
-        m.setFrom("mon.cul@hotmail.com");
-        m.setSubject("mon sujet");
-        SmtpClient test = new SmtpClient("localhost",25);
-        test.sendMail(m);*/
-
     }
 }
