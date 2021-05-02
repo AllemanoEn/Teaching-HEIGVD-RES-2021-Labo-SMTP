@@ -1,10 +1,12 @@
 package ch.heigvd.res.smtp;
 
 import ch.heigvd.res.model.Mail;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.logging.Logger;
 
 public class SmtpClient implements ISmtpClient{
@@ -78,7 +80,7 @@ public class SmtpClient implements ISmtpClient{
         pw.write("\r\n");
         pw.flush();
 
-        pw.println("Subject: " + mail.getSubject());
+        pw.println("Subject: " + "=?utf-8?B?"+ Base64.getEncoder().encodeToString(mail.getSubject().getBytes()) +"?=");
         pw.write("\r\n");
 
         pw.println(mail.getBody());

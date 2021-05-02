@@ -17,7 +17,7 @@ public class Prank {
 
         int index = message.indexOf("!!");
         this.subject = message.substring(10,index);
-        this.message = message.substring(index);
+        this.message = message.substring(index+4); //Pour enelver les !! et le retour à la ligne
     }
 
     public Mail generateMailMessage(){
