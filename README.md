@@ -4,7 +4,6 @@
 Le 02.05.2021 \
 Auteurs : Allemano Enzo, Zacheo Luca
 
-
 ## Description
 Le but du logiciel développé est d'envoyer des mails forgés en grande quantité ainsi que de manière automatisée.
 Pour ce faire nous avons une liste d'emails ainsi qu'une liste de Pranks (étant les messages envoyés).
@@ -18,8 +17,3 @@ Le programme se connecte en localhost sur le port 25, nous utilisons un serveur 
 ## Tuto d'utilisation
 
 ## Choix d'implémentation
-
-
-## Deliverables
-
-## References

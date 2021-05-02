@@ -9,9 +9,9 @@ public class AutoMailPranker {
 
         Path currentRelativePath = Paths.get("");
         String currentDir = currentRelativePath.toAbsolutePath().toString();
-        String appConfigPath = currentDir + "\\src\\main\\java\\config\\config.properties";
-        String messageFilePath = currentDir + "\\src\\main\\java\\config\\messages.utf8";
-        String victimsFilePath = currentDir + "\\src\\main\\java\\config\\victims.utf8";
+        String appConfigPath = currentDir + "\\config\\config.properties";
+        String messageFilePath = currentDir + "\\config\\messages.utf8";
+        String victimsFilePath = currentDir + "\\config\\victims.utf8";
 
         PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,10,appConfigPath);
         pg.generate();
