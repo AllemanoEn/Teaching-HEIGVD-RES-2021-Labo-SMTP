@@ -54,6 +54,17 @@ Le séparateur entre les messages est un double trait d'union (--).
 * Lancer la commande `java -jar Teaching-HEIGVD-RES-2021-Labo-SMTP-1.0-SNAPSHOT.jar`
 * Constater le résultat sur le serveur MockMock
 
-
 ## Choix d'implémentation
 
+![UML](figures/UML.PNG)
+
+Pour l'implémentation ainsi que l'architecture du projet nous avons 2 packages contenut dans ch.heigvd.res.
+
+* `model` contenant nos classes utiles à la réalisation du Prank
+* `smtp` contenant nos classes utiles à la connection au serveur et à l'envoi des données
+
+Notre "main" est la classe AutoMailPranker, il suffit de l'exécuter pour que l'ensemble des actions effectues comme il faut.
+
+<h4> Discussion avec le serveur </h4>
+
+![discussion](figures/discussion.PNG)
