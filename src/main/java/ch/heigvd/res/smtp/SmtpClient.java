@@ -1,7 +1,6 @@
 package ch.heigvd.res.smtp;
 
 import ch.heigvd.res.model.Mail;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,6 +17,8 @@ public class SmtpClient implements ISmtpClient{
     private PrintWriter pw;
     private Socket clientSocket;
 
+    private static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
+
     /**
      * Constructor of the class SmtpClient
      *
@@ -33,7 +34,7 @@ public class SmtpClient implements ISmtpClient{
     public void sendMail(Mail mail) throws IOException {
         clientSocket = new Socket(smtpServerAddress, smtpServerPort);
 
-        System.out.println("-- STARTING SMPT CONNECTION --");
+        LOG.info("-- STARTING SMPT CONNECTION --");
 
         br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
         pw = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(),StandardCharsets.UTF_8),true);
@@ -55,6 +56,8 @@ public class SmtpClient implements ISmtpClient{
             System.out.println(fromSMTPserver);
         }
 
+        LOG.info("-- SENDING MAIL HEADER --");
+
         pw.println("MAIL FROM:" + mail.getFrom());
         fromSMTPserver = br.readLine();
         System.out.println(fromSMTPserver + " - MAIL FROM");
@@ -71,9 +74,11 @@ public class SmtpClient implements ISmtpClient{
             System.out.println(fromSMTPserver + " - RCPT TO");
         }
 
+        LOG.info("-- SENDING MAIL DATA --");
+
         pw.println("DATA");
         fromSMTPserver = br.readLine();
-        System.out.println(fromSMTPserver + " - DATA");
+        System.out.println(fromSMTPserver);
         pw.println("Content-type: text/plain; charset=utf-8");
         pw.println("From: " + mail.getFrom());
 
@@ -98,6 +103,8 @@ public class SmtpClient implements ISmtpClient{
         System.out.println(fromSMTPserver + " - Body");
 
         pw.println("QUIT");
+
+        LOG.info("-- STOPPING SMPT CONNECTION --");
 
         pw.close();
         br.close();

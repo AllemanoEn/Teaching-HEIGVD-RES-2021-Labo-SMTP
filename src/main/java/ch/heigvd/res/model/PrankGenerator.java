@@ -25,15 +25,15 @@ public class PrankGenerator{
      *
      * @param pathToMessageFile path to the message file
      * @param pathToVictimsFile  path to the victims file
-     * @param groupSize   size of the group
      * @param appConfigPath   path to the config file
      */
-    public PrankGenerator(String pathToMessageFile, String pathToVictimsFile, int groupSize, String appConfigPath) throws IOException {
+    public PrankGenerator(String pathToMessageFile, String pathToVictimsFile, String appConfigPath) throws IOException {
 
         appProps = new Properties();
         appProps.load(new FileInputStream(appConfigPath));
 
-        nbGroup = Integer.parseInt(appProps.getProperty("numberOfGroup"));
+        this.nbGroup = Integer.parseInt(appProps.getProperty("numberOfGroup"));
+        this.groupSize = Integer.parseInt(appProps.getProperty("groupSize"));
 
         if (groupSize < 3 || nbGroup < 1){
             throw new RuntimeException("Group number must be grather or egal than 3 \nGroup size must be grather than or egal than  1");
@@ -41,7 +41,6 @@ public class PrankGenerator{
 
         this.pathToMessageFile = pathToMessageFile;
         this.pathToVictimsFile = pathToVictimsFile;
-        this.groupSize = groupSize;
     }
 
     /**
@@ -52,15 +51,15 @@ public class PrankGenerator{
         bfMessages = new BufferedReader(new InputStreamReader(new FileInputStream(pathToMessageFile),StandardCharsets.UTF_8));
         bfMailAddress = new BufferedReader(new InputStreamReader(new FileInputStream(pathToVictimsFile),StandardCharsets.UTF_8));
 
-        //Put all message from message file into a vector
-        String line = "";
-        String it = "";
+        //Put all message with subject from message file into a vector
+        String line;
+        StringBuilder it = new StringBuilder();
         while ((line = bfMessages.readLine()) != null){
             if(line.equals("--")){
-                vMessage.add(it);
-                it = "";
+                vMessage.add(it.toString());
+                it = new StringBuilder();
             }else{
-                it += line+"\r\n";
+                it.append(line).append("\r\n");
             }
         }
 
@@ -70,6 +69,7 @@ public class PrankGenerator{
             vPerson.add(new Person(person));
         }
 
+        //Create all groupe
         for (int i = 0;i < nbGroup;i++){
             vGroup.add(new Group());
         }

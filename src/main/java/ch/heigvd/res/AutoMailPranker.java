@@ -14,7 +14,7 @@ public class AutoMailPranker {
         String messageFilePath = currentDir + "\\config\\messages.utf8";
         String victimsFilePath = currentDir + "\\config\\victims.utf8";
 
-        PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,10,appConfigPath);
+        PrankGenerator pg = new PrankGenerator(messageFilePath,victimsFilePath,appConfigPath);
         pg.generate();
     }
 }

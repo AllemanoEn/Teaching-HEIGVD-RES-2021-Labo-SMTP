@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Prank {
     private Person victimSender;
     private Person victimRcpt;
-    private List<Person> witnessList = new ArrayList<>();
+    private List<Person> witnessList;
     private String message;
     private String subject;
 
@@ -40,7 +40,7 @@ public class Prank {
 
         mail.setTo(victimRcpt.getAddress());
 
-        String[] cc = witnessList.stream().map(person -> person.getAddress()).collect(Collectors.toList()).toArray(new String[]{});
+        String[] cc = witnessList.stream().map(Person::getAddress).collect(Collectors.toList()).toArray(new String[]{});
         mail.setCc(cc);
 
         mail.setFrom(victimSender.getAddress());

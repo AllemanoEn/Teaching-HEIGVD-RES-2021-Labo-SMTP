@@ -1,7 +1,6 @@
 package ch.heigvd.res.model;
 
 import java.util.*;
-
 import lombok.Getter;
 
 public class Group {
