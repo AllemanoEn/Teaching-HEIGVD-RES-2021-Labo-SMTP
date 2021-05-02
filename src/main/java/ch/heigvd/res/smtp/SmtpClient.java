@@ -68,7 +68,7 @@ public class SmtpClient implements ISmtpClient{
         pw.println("DATA");
         fromSMTPserver = br.readLine();
         System.out.println(fromSMTPserver + " - DATA");
-        pw.println("Content Type: text/plain; charset=utf-8");
+        pw.println("Content-type: text/plain; charset=utf-8");
         pw.println("From: " + mail.getFrom());
 
         pw.println("To: " + mail.getTo());
