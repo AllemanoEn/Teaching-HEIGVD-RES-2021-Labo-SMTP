@@ -18,6 +18,12 @@ public class SmtpClient implements ISmtpClient{
     private PrintWriter pw;
     private Socket clientSocket;
 
+    /**
+     * Constructor of the class SmtpClient
+     *
+     * @param smtpServerAddress srv address
+     * @param smtpServerPort  srv port
+     */
     public SmtpClient(String smtpServerAddress,int smtpServerPort){
         this.smtpServerAddress=smtpServerAddress;
         this.smtpServerPort=smtpServerPort;

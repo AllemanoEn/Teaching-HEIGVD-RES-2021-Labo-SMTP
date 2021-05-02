@@ -20,6 +20,14 @@ public class PrankGenerator{
     int nbGroup;
     Properties appProps;
 
+    /**
+     * Constructor of the class PrankGenerator
+     *
+     * @param pathToMessageFile path to the message file
+     * @param pathToVictimsFile  path to the victims file
+     * @param groupSize   size of the group
+     * @param appConfigPath   path to the config file
+     */
     public PrankGenerator(String pathToMessageFile, String pathToVictimsFile, int groupSize, String appConfigPath) throws IOException {
 
         appProps = new Properties();
@@ -36,6 +44,10 @@ public class PrankGenerator{
         this.groupSize = groupSize;
     }
 
+    /**
+     * Method to generate the prank and initialize everything useful
+     *
+     */
     public void generate() throws IOException {
         bfMessages = new BufferedReader(new InputStreamReader(new FileInputStream(pathToMessageFile),StandardCharsets.UTF_8));
         bfMailAddress = new BufferedReader(new InputStreamReader(new FileInputStream(pathToVictimsFile),StandardCharsets.UTF_8));

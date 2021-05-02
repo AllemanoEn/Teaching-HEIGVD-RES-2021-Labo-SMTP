@@ -19,7 +19,7 @@ Le programme se connecte en localhost sur le port 25, nous utilisons un serveur 
 * Télécharger la release
 * Décompresser le zip
 * Démarrer Docker
-* Aller dans le dir docker et lancez `BUILDPASSUR DU NOM.sh` ainsi que `RUN CHEPA.sh`
+* Aller dans le dir docker et lancez respectivement `build-image.sh` ainsi que `run-container.sh`
 * vérifier le bon lancement du srv en tappant `localhost:8282` dans un navigateur.
 
 

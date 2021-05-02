@@ -10,6 +10,12 @@ public class Prank {
     private String message;
     private String subject;
 
+    /**
+     * Constructor of the class Prank
+     *
+     * @param group group of people to play the prank on
+     * @param message  text message to send
+     */
     public Prank(Group group, String message){
         victimSender = group.getMembers().elementAt(0);
         victimRcpt = group.getMembers().elementAt(1);
@@ -20,6 +26,11 @@ public class Prank {
         this.message = message.substring(index+4); //Pour enelver les !! et le retour à la ligne
     }
 
+    /**
+     * Method to generate mail struct message and return it
+     *
+     * @return  the mail generated
+     */
     public Mail generateMailMessage(){
         Mail mail = new Mail();
 
